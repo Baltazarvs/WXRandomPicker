@@ -16,6 +16,7 @@
 ***********************************************************************************/
 
 #include "AppFrame.h"
+#include <sstream>
 
 AppFrame::AppFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	: wxFrame(nullptr, wxID_ANY, title, pos, size), main_lb(nullptr)
@@ -75,6 +76,9 @@ void AppFrame::OnPick(wxCommandEvent& event)
 	{
 		wxString string_temp = this->main_lb->GetString(rand() % this->main_lb->GetCount());
 		wxMessageBox(string_temp, "Item Picked", wxOK | wxICON_INFORMATION);
+		std::ostringstream oss;
+		oss << "Last Picked: " << string_temp;
+		this->main_status->SetStatusText(oss.str().c_str(), 1);
 	}
 	return;
 }
